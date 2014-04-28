@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>reveal.js - The HTML Presentation Framework</title>
+
+        <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+        <meta name="author" content="Hakim El Hattab">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/beige.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <link rel="stylesheet" href="bootstrap.css">
+        <style>
+            p {
+                text-align: left !important;
+            }
+            li, button, p {
+                font-size: 20px !important;
+            }
+        </style>
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+            if( window.location.search.match( /print-pdf/gi ) ) {
+                var link = document.createElement( 'link' );
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = 'css/print/pdf.css';
+                document.getElementsByTagName( 'head' )[0].appendChild( link );
+            }
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <section>
+                    <h1>HTML DOM - Document Object Model</h1>
+                </section>
+
+                <section>
+                    
+                    <h2>What is HTML</h2>
+                    <p>
+                        HTML - Hypertext Markup Language is a standardized system for tagging text files to achieve font, color, graphic and hyperlink effects. Today, with the emergence of HTML 5, HTML is now being used to build web apps with capabilites that go far beyond simple styling and text effects.
+                    </p>
+
+                    <h2>What is DOM</h2>
+                    <p>
+                        DOM is a W3C (World Wide Web Consortium) standard and defines a way for accessing documents. DOM can be applied to accessing several different file types written in various markup languages such as XML and HTML. Today we will be going over what DOM is and how it applies to manipulating HTML to build dynamic applications.
+                    </p>
+
+                </section>
+
+                <section>
+                    <section>
+                        <h2> HTML Overview </h2>
+                        <p>
+                            HTML can be broken down into two basic components, tags/elements and attributes.
+                        </p>
+                        <p>
+                            Tags are elements that instruct the browser what to render. They are (typically) keywords that are surrounded by <b> angle brackets </b> like &lt;html&gt;. They usually have a nested pattern such as:
+                        </p>
+                        <pre>
+                        &lt;html&gt;
+                          &lt;head&gt;
+                          &lt;/head&gt;
+                          &lt;body&gt;
+                            &lt;p&gt;
+                            &lt;/p&gt;
+                          &lt;/body&gt;
+                        &lt;/html&gt;
+                        </pre>
+                        <p>
+                            Where  &lt; p &gt; tells the browser to render a paragraph and &lt; html &gt; lets the browser know what kind of document to render.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2> HTML Attributes </h2>
+                        <p>
+                            As tags instruct the web browser what to render, attributes tell the browser how to render that tag(but not always). Attributes added within the opening angle brackets of the tag such as:
+                        </p>
+                        <pre>
+                        &lt; p style="color:red" &gt; Hello &lt; /p &gt;
+                        </pre>
+                        <p>
+                            Where style is an attribute of the p tag. The text Hello is however not an attribute and is simply a child node of p. We will get into nodes in the next section.
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2> DOM </h2>
+                        <p>
+                            DOM stands for Document Object Model which describes a standard for interacting with documents. This interaction includes changing, getting, adding or deleting elements of your document. In DOM everything is a node. That means, in HTML DOM, all elements and attributes are nodes. Even the entire document is a document node. The different types of nodes are:
+                        </p>
+                        <ul>
+                            <li>Root Node: This is the document node that is a parent to all other nodes that reside in the document.</li>
+                            <li>Element Node: This refers to tags in an HTML document.</li>
+                            <li>Attribute Node: These are attributes that belong to tags for an element.</li>
+                            <li>Text Node: Even text that appears inside a node element is a node.</li>
+                        </ul>
+                        <p>
+                            Every node has a parent except the root node. Nodes can have several child nodes and nodes without children are called leaf nodes. Nodes will also have siblings if their parent node have other children. Bellow shows the structure of a typical HTML DOM tree:
+                        </p>
+                        <img src="htmltree.gif"></img>
+                    </section>
+                    <section>
+                        <h2> HTML DOM Methods </h2>
+                        <p>
+                            When HTML is read by the browser, it is compiled into DOM tree structure that allows developers to interface with the HTML. To manipulate the HTML itself, HTML DOM Methods are used by javascript to modify the DOM tree structure which changes the way the HTML is rendered in the browser. Methods used in this example are as follows.
+                        </p>
+                        <br />
+                        <pre>
+document.getElementById("Element ID")               : Grab the first element with matching id.
+document.getElementsByClassName("Element Class")    : Grab an array of elements by their class name.
+document.createElement("Element Type")              : Create any element like &lt;p&gt; or &lt;div&gt;
+document.createTextNode("Your Text")                : Put your text in here.
+node.appendChild(node)                              : Appends child node.
+node.setAttribute("attributeName","attributeValue") : Allows you to set attributes like class and style.
+                        </pre>
+                        <button type='button' onclick="exChangeColor()">change color</button>
+                        <button type='button' onclick="exDeleteNode()">delete node</button>
+                        <button type='button' onclick="exAddNode()">add node</button>
+                        <div id="dom-example">
+                            <p class="exampleElements">Hello</p>
+                        </div>
+                    </section>
+                    <section>
+                        <h2> JQuery </h2>
+                        <p> 
+                            Not all browsers are equal and some dom methods used to manipulate html are not supported in all browsers. Because having cross-browser support is so important, libraries like jQuery can have a huge impact in your productivity. Instead of writting scripts per browser, just write one script that works on all browsers using these libraries.
+                        </p> 
+
+                        <p>
+                            Dom manipulation also becomes much more easier to do with JQuery. The following shows the difference between hard-coding dom in ie and mozilla vs. JQuery.
+                        </p>
+
+                        <pre>
+            // Works in Mozilla but not IE
+            var element = documnet.getElementById("example");
+            element.innerHTML("\
+                &lt;p&gt;\
+                    Hi\
+                &lt;/p&gt;\
+            ");
+
+            // Seperate script for IE
+            var element = document.getElementById("example");
+            var newParagraph = document.createElement("p");
+            var textNode = document.createTextNode("Hi");
+
+            newParagraph.appendChild(textNode);
+            element.appendChild(newParagraph);
+
+            // JQuery version works in both Mozilla and IE
+            $("example").append("\
+                &lt;p&gt;\
+                    Hi\
+                &lt;/p&gt;\
+            ");
+                        </pre>
+                    </section>
+                </section>
+
+            </div>
+        </div>
+        <script src="example.js"></script>
+        <script src="lib/js/head.min.js"></script>
+        <script src="Chart.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+        <script src="profile.data.js"></script>
+        <script src="sym.node.data.js"></script>
+        <script src="limit.data.js"></script>
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
